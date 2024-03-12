@@ -12,10 +12,12 @@
 #### 진행 방법 👇
 - git clone [this Repo]
 - cd DoStudyHere
-- git checkout -b [이름 이니셜]
+- git checkout [week1]
+- mkdir [이름이니셜]
+- cd [이름이니셜 폴더]
 
 까지 완료하면 로컬환경 구성완료
-해당 브랜치에서 자바 프로젝트 생성하기 Java 17로 진행하면 될 것 같습니다.
+해당 디렉토리에서 자바 프로젝트 생성하기 Java 17로 진행하면 될 것 같습니다.  
 의존성은 넣지않기 ❗️
 
 기능 단위로 커밋할 것
