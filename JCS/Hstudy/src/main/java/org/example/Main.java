@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import org.example.http.request.HttpRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +17,7 @@ public class Main {
 
     public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket(DEFAULT_PORT)) {
-            logger.info("Listen on {}:{}",serverSocket.getInetAddress(), serverSocket.getLocalPort());
+            logger.info("Listen on {}:{}", serverSocket.getInetAddress(), serverSocket.getLocalPort());
             Socket socket = null;
             while (true) {
                 try {
@@ -24,12 +25,15 @@ public class Main {
                     logger.info("Client connected : {}:{}", socket.getInetAddress(), socket.getPort());
 
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    StringBuilder stringBuilder = new StringBuilder();
-                    String line;
-                    while ((line = bufferedReader.readLine()) != null && !line.isEmpty()) {
-                        stringBuilder.append(line).append("\r\n");
+                    HttpRequest httpRequest = null;
+                    try {
+                        httpRequest = HttpRequest.from(bufferedReader);
+                    } catch (Exception e) {
+                        logger.error(e.getMessage());
                     }
-                    logger.info("Received : {}", stringBuilder.toString());
+                    if (httpRequest != null) {
+                        logger.info("Request URL : {}", httpRequest.getRequestUrl());
+                    }
                 } catch (Exception e) {
                     logger.error(e.getMessage());
                 } finally {

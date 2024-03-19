@@ -13,7 +13,7 @@ public enum HttpMethod {
 
     public static HttpMethod of(String value) {
         return Arrays.stream(HttpMethod.values())
-                .filter(httpMethod -> httpMethod.equals(value))
+                .filter(httpMethod -> httpMethod.name.equals(value))
                 .findAny().orElseThrow(() -> new IllegalArgumentException("Not Allowed Method"));
     }
 
