@@ -1,6 +1,6 @@
 package org.example.http.request;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,13 +9,12 @@ public class HttpHeaders {
     private static final int HEADER_KEY_INDEX = 0;
     private static final int HEADER_VALUE_INDEX = 1;
     private final Map<String, String> headers;
-
     private HttpHeaders(Map<String, String> headers) {
         this.headers = headers;
     }
 
     public static HttpHeaders of(List<String> lines) {
-        Map<String, String> headers = new HashMap<>();
+        Map<String, String> headers = new LinkedHashMap<>();
         for (String line : lines) {
             String[] splits = line.split(HEADER_SPLIT_DELIMITER);
             headers.put(splits[HEADER_KEY_INDEX], splits[HEADER_VALUE_INDEX]);

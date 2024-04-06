@@ -68,4 +68,10 @@ public class HttpRequest {
     public boolean isGet() {
         return httpFirstLine.getHttpMethod().equals(HttpMethod.GET);
     }
+
+    public HttpHeaders getHeader() {
+        return this.httpHeaders;
+    }
+
 }
+
